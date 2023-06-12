@@ -20,6 +20,16 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockercredentials'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockercredentials'
+    repository: 'devisyam / javaimage'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 - task: CopyFiles@2
   inputs:
     Contents: '**/*.war'
