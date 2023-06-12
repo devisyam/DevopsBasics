@@ -21,15 +21,6 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: CopyFiles@2
-  inputs:
-    Contents: '**/*.war'
-    TargetFolder: '.'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/**/*.war'
-    ArtifactName: 'webapp'
-    publishLocation: 'Container'
 - task: Docker@2
   inputs:
     containerRegistry: 'dockercredentials'
@@ -39,4 +30,4 @@ steps:
     containerRegistry: 'dockercredentials'
     repository: 'devisyam / javaimage'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/AzureDockerfile'
